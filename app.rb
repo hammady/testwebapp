@@ -1,6 +1,7 @@
 require 'sinatra'
 
 get /\/.*/ do
-  name = ENV['APP_NAME'] || 'Unknown'
-  "Hello world! My name is #{name}."
+  app_name = ENV['APP_NAME'] || 'Unknown'
+  namespace = File.read '/var/run/secrets/kubernetes.io/serviceaccount/namespace' rescue 'Unknown'
+  "My namespace is #{namespace} and my name is #{app_name}."
 end
